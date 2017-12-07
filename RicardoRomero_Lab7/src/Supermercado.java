@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /*
@@ -19,6 +20,8 @@ public class Supermercado extends javax.swing.JFrame {
      */
     public Supermercado() {
         initComponents();
+        h = new hilo(new JFrame());
+
     }
 
     /**
@@ -30,13 +33,6 @@ public class Supermercado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        procesando = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jt_orden = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,68 +56,6 @@ public class Supermercado extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cb_cajero = new javax.swing.JComboBox<>();
         realizar_compra = new javax.swing.JButton();
-
-        jLabel8.setText("nombrecajero");
-
-        jLabel9.setText("nombrecliente");
-
-        jLabel10.setText("Procesando");
-
-        jt_orden.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Producto", "Cliente", "Tiempo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jt_orden);
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(57, Short.MAX_VALUE))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86))))
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(procesando, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(procesando, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -238,6 +172,11 @@ public class Supermercado extends javax.swing.JFrame {
         jLabel6.setText("Productos");
 
         agregar_orden.setText("Agregar a Orden");
+        agregar_orden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregar_ordenMouseClicked(evt);
+            }
+        });
 
         jLabel7.setText("Cajero");
 
@@ -320,9 +259,9 @@ public class Supermercado extends javax.swing.JFrame {
 
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_cajero.getModel();
             modelo.addElement(c);
-            
+
             nombre_cajero.setText("");
-            
+
             JOptionPane.showMessageDialog(this, "Creado Exitosamente");
 
         } catch (Exception e) {
@@ -333,24 +272,24 @@ public class Supermercado extends javax.swing.JFrame {
         String nombre;
         int precio;
         int tiempo;
-        
+
         try {
             nombre = nombre_productos.getText();
             precio = Integer.parseInt(precio_productos.getText());
             tiempo = Integer.parseInt(tiempo_producto.getText());
-            
+
             Productos p = new Productos(nombre, precio, tiempo);
             lista2.add(p);
-            
+
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_productos.getModel();
             modelo.addElement(p);
-            
+
             nombre_productos.setText("");
             precio_productos.setText("");
             tiempo_producto.setText("");
-            
+
             JOptionPane.showMessageDialog(this, "Creado Exitosamente");
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_crear_productoMouseClicked
@@ -359,18 +298,22 @@ public class Supermercado extends javax.swing.JFrame {
         String nombre;
         int edad = 0;
         String orden = "";
-        
+
         try {
             nombre = nombre_cliente.getText();
-            
+
             Clientes c = new Clientes(nombre, edad, orden);
             lista3.add(c);
-            
-            
-            
+
+            JOptionPane.showMessageDialog(this, "Creado Exitosamente");
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_ordenarMouseClicked
+
+    private void agregar_ordenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregar_ordenMouseClicked
+        
+    }//GEN-LAST:event_agregar_ordenMouseClicked
 
     /**
      * @param args the command line arguments
@@ -383,7 +326,7 @@ public class Supermercado extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -413,33 +356,28 @@ public class Supermercado extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_productos;
     private javax.swing.JButton crear_cajero;
     private javax.swing.JButton crear_producto;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jt_orden;
     private javax.swing.JTextField nombre_cajero;
     private javax.swing.JTextField nombre_cliente;
     private javax.swing.JTextField nombre_productos;
     private javax.swing.JButton ordenar;
     private javax.swing.JTextField precio_productos;
-    private javax.swing.JTextField procesando;
     private javax.swing.JButton realizar_compra;
     private javax.swing.JTextField tiempo_producto;
     // End of variables declaration//GEN-END:variables
 ArrayList<Cajeros> lista = new ArrayList();
-ArrayList<Productos> lista2 = new ArrayList();
-ArrayList<Clientes> lista3 = new ArrayList();
+    ArrayList<Productos> lista2 = new ArrayList();
+    ArrayList<Clientes> lista3 = new ArrayList();
+    ArrayList<orden> lista4 = new ArrayList();
+    hilo h;
 }
