@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +22,6 @@ public class Supermercado extends javax.swing.JFrame {
     public Supermercado() {
         initComponents();
         h = new hilo(new JFrame());
-
     }
 
     /**
@@ -171,6 +171,12 @@ public class Supermercado extends javax.swing.JFrame {
 
         jLabel6.setText("Productos");
 
+        cb_productos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_productosItemStateChanged(evt);
+            }
+        });
+
         agregar_orden.setText("Agregar a Orden");
         agregar_orden.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,6 +187,11 @@ public class Supermercado extends javax.swing.JFrame {
         jLabel7.setText("Cajero");
 
         realizar_compra.setText("Realizar Compra");
+        realizar_compra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                realizar_compraMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -261,6 +272,8 @@ public class Supermercado extends javax.swing.JFrame {
             modelo.addElement(c);
 
             nombre_cajero.setText("");
+            
+            h.run();
 
             JOptionPane.showMessageDialog(this, "Creado Exitosamente");
 
@@ -283,6 +296,8 @@ public class Supermercado extends javax.swing.JFrame {
 
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_productos.getModel();
             modelo.addElement(p);
+            
+            h.start();
 
             nombre_productos.setText("");
             precio_productos.setText("");
@@ -312,8 +327,23 @@ public class Supermercado extends javax.swing.JFrame {
     }//GEN-LAST:event_ordenarMouseClicked
 
     private void agregar_ordenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregar_ordenMouseClicked
-        
+
     }//GEN-LAST:event_agregar_ordenMouseClicked
+
+    private void realizar_compraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_realizar_compraMouseClicked
+        
+    }//GEN-LAST:event_realizar_compraMouseClicked
+
+    private void cb_productosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_productosItemStateChanged
+        if (evt.getStateChange() == 2) {
+            Cajeros c = (Cajeros) cb_cajero.getSelectedItem();
+            Object[] newrow = {c.getNombre(), c.getOrdenes()};
+            
+            DefaultTableModel modelo = (DefaultTableModel) sp.jt_procliti.getModel();
+            modelo.addRow(newrow);
+            sp.jt_procliti.setModel(modelo);
+        }
+    }//GEN-LAST:event_cb_productosItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -380,4 +410,6 @@ ArrayList<Cajeros> lista = new ArrayList();
     ArrayList<Clientes> lista3 = new ArrayList();
     ArrayList<orden> lista4 = new ArrayList();
     hilo h;
+    Supermercado2 sp;
+
 }
