@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -54,4 +55,36 @@ public class Cajeros {
     }
     
     
+    public void run() {
+        
+        Supermercado2 nuevo = new Supermercado2();
+        nuevo.pack();
+        nuevo.setLocationRelativeTo(null);
+        nuevo.nombre_cajero.setText(nombre);
+        nuevo.nombre_cliente.setText(nombre);
+        nuevo.setVisible(true);
+        while (true) {            
+            nuevo.jt_procliti.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Edad", "ID", "Lugar"
+            }
+        ));
+            DefaultTableModel modelo = (DefaultTableModel) nuevo.jt_procliti.getModel();
+            for (int i = 0; i < ordenes.size(); i++) {
+                if(ordenes.get(i).getC().equals(nombre)) {
+                    Object [] newrow = {ordenes.get(i).getC(),ordenes.get(i).getCl(),ordenes.get(i).getProducto()};
+                    modelo.addRow(newrow);
+                    nuevo.jt_procliti.setModel(modelo);
+                }
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+            }
+        }
+        
+    }
 }

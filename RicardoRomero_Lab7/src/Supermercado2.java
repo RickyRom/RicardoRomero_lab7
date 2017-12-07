@@ -153,8 +153,8 @@ public class Supermercado2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jt_procliti;
-    private javax.swing.JLabel nombre_cajero;
-    private javax.swing.JLabel nombre_cliente;
+    public javax.swing.JLabel nombre_cajero;
+    public javax.swing.JLabel nombre_cliente;
     private javax.swing.JTextField procesando;
     // End of variables declaration//GEN-END:variables
 hilo h;

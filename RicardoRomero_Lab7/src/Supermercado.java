@@ -297,7 +297,7 @@ public class Supermercado extends javax.swing.JFrame {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_productos.getModel();
             modelo.addElement(p);
             
-            h.start();
+            
 
             nombre_productos.setText("");
             precio_productos.setText("");
@@ -411,5 +411,5 @@ ArrayList<Cajeros> lista = new ArrayList();
     ArrayList<orden> lista4 = new ArrayList();
     hilo h;
     Supermercado2 sp;
-
+Cajeros cajero;
 }
