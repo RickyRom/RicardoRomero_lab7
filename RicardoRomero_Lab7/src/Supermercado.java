@@ -229,6 +229,11 @@ public class Supermercado extends javax.swing.JFrame {
         jLabel5.setText("Nombre Cliente");
 
         ordenar.setText("Ordenar");
+        ordenar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ordenarMouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("Productos");
 
@@ -349,6 +354,23 @@ public class Supermercado extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_crear_productoMouseClicked
+
+    private void ordenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordenarMouseClicked
+        String nombre;
+        int edad = 0;
+        String orden = "";
+        
+        try {
+            nombre = nombre_cliente.getText();
+            
+            Clientes c = new Clientes(nombre, edad, orden);
+            lista3.add(c);
+            
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_ordenarMouseClicked
 
     /**
      * @param args the command line arguments
